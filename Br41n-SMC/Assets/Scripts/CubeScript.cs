@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeScript : MonoBehaviour {
-    string[] colors = { "red", "green", "magenta", "yellow", "cyan" };
+    string[] colors = { "Red", "Green", "Blue", "Yellow", "Cyan" };
     List<GameObject> cubes = new List<GameObject>();
 
 	// Use this for initialization
@@ -24,7 +24,7 @@ public class CubeScript : MonoBehaviour {
         {
             foreach(GameObject cube in cubes)
             {
-                if(cube.tag == "red")
+                if(cube.tag == "Red")
                 {
                     cube.SetActive(false);
                 } else
@@ -38,7 +38,7 @@ public class CubeScript : MonoBehaviour {
         {
             foreach (GameObject cube in cubes)
             {
-                if (cube.tag == "green")
+                if (cube.tag == "Green")
                 {
                     cube.SetActive(false);
                 }
@@ -53,7 +53,7 @@ public class CubeScript : MonoBehaviour {
         {
             foreach (GameObject cube in cubes)
             {
-                if (cube.tag == "red")
+                if (cube.tag == "Yellow")
                 {
                     cube.SetActive(false);
                 }
@@ -64,11 +64,11 @@ public class CubeScript : MonoBehaviour {
             }
         }
 
-        if (Input.GetKey(KeyCode.M))
+        if (Input.GetKey(KeyCode.B))
         {
             foreach (GameObject cube in cubes)
             {
-                if (cube.tag == "magenta")
+                if (cube.tag == "Blue")
                 {
                     cube.SetActive(false);
                 }
@@ -79,26 +79,12 @@ public class CubeScript : MonoBehaviour {
             }
         }
 
-        if (Input.GetKey(KeyCode.Y))
-        {
-            foreach (GameObject cube in cubes)
-            {
-                if (cube.tag == "yellow")
-                {
-                    cube.SetActive(false);
-                }
-                else
-                {
-                    cube.SetActive(true);
-                }
-            }
-        }
 
         if (Input.GetKey(KeyCode.C))
         {
             foreach (GameObject cube in cubes)
             {
-                if (cube.tag == "cyan")
+                if (cube.tag == "Cyan")
                 {
                     cube.SetActive(false);
                 }
