@@ -9,7 +9,7 @@ public class PlatformMov : MonoBehaviour {
     bool positiveMov = false;
     public float movDistance = 2.0f;
     public float speed = 2;
-    public Vector2 direction = new Vector2(0, 1);
+    public Vector2 direction = new Vector2(0, 0);
  
     // Use this for initialization
     void Start () {
@@ -33,7 +33,13 @@ public class PlatformMov : MonoBehaviour {
         else
         {
 
-            movement = new Vector3(speed * direction.x, 0);
+            if (Mathf.Abs(referencePostion.x - this.transform.position.x) > movDistance)
+                positiveMov = !positiveMov;
+
+            if (positiveMov)
+                direction.x = -1 * direction.x;
+
+            movement = new Vector2(direction.x * speed, direction.y * speed);
         }
 
 
