@@ -5,13 +5,23 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
 
-  
+    public float speed;
+    public float jumpForce;
     private float moveInput;
-    private bool isOnTheGround = true;
+
+    private int extraJumps;
+    public int extraJumpsValue;
+
     private Rigidbody2D rb;
-   // private int PlayerLevel = 3;
-    private int airjump = 0;
+
+    private bool isFacingRight = true;
+
+    private bool isOnTheGround = true;
+    private bool isAgainstWall = false;
+
     public Transform groundCheck;
+    public Transform leftCheck;
+    public Transform rightCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
 
@@ -23,41 +33,52 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
+
         if (isOnTheGround)
         {
-            airjump = 0;
+            extraJumps = extraJumpsValue;
         }
 
+        if (Input.GetKeyDown(KeyCode.UpArrow) && extraJumps > 0)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+            extraJumps--;
+            Debug.Log("air jump");
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow) && extraJumps == 0 && isOnTheGround == true)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+            Debug.Log("jump");
+        }
 
-        if (Input.GetKey("right"))
-        {
-            transform.position += transform.right * 0.1f;
-            Debug.Log("right");
-        }
-        else if (Input.GetKey("left"))
-        {
-            transform.position += transform.right * -0.1f;
-            Debug.Log("left");
-        }
-        else if (Input.GetKey("up") && isOnTheGround)
-        {
-            {
-                    isOnTheGround = !isOnTheGround;
-                transform.position += transform.up * 0.5f;
-                Debug.Log("up");
-            }
-        }
-      
     }
-
-
     void FixedUpdate()
     {
+
         isOnTheGround = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
-        Debug.Log(isOnTheGround);
+
+        if(Physics2D.OverlapCircle(leftCheck.position, checkRadius, whatIsGround) || Physics2D.OverlapCircle(rightCheck.position, checkRadius, whatIsGround))
+        {
+            isAgainstWall = true;
+        }
+        else
+            isAgainstWall = false;
+
+        moveInput = Input.GetAxis("Horizontal");
+        if(!isAgainstWall)
+            rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+
+        if (isFacingRight == false && moveInput > 0)
+            Flip();
+        else if (isFacingRight == true && moveInput < 0)
+            Flip();
     }
-    
+
     void Flip()
     {
+        isFacingRight = !isFacingRight;
+        Vector3 Scaler = transform.localScale;
+        Scaler.x *= -1;
+        transform.localScale = Scaler;
     }
 }
