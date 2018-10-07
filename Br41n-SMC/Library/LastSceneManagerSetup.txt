@@ -1,4 +1,4 @@
 sceneSetups:
-- path: C:/Users/Quentin/Documents/GitHub/1M1G-Challenge/1M1G - 01/Assets/Scenes/Scene01.unity
+- path: Assets/Scenes/QuentinScene.unity
   isLoaded: 1
   isActive: 1

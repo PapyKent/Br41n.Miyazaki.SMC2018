@@ -61,7 +61,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\PlatformMov.cs" />
     <Compile Include="Assets\Scripts\sample.cs" />
+    <Compile Include="Assets\Scripts\ScrollingMov.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Quentin/Documents/GitHub/Br41n.Miyazaki.SMC2018/Br41n-SMC/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
