@@ -57,7 +57,7 @@ public class CharacterController : MonoBehaviour
 
         isOnTheGround = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
-        if(Physics2D.OverlapCircle(leftCheck.position, checkRadius, whatIsGround) || Physics2D.OverlapCircle(rightCheck.position, checkRadius, whatIsGround))
+        if((Physics2D.OverlapCircle(leftCheck.position, checkRadius, whatIsGround) || Physics2D.OverlapCircle(rightCheck.position, checkRadius, whatIsGround)) && !isOnTheGround)
         {
             isAgainstWall = true;
         }
