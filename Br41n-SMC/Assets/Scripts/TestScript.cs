@@ -8,11 +8,14 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TestScript : MonoBehaviour {
+public class TestScript : MonoBehaviour
+{
+
     int PORT = 1000;
     static UdpClient udp;
     Thread thread;
     static IPEndPoint remoteEP;
+    public static string result = "";
     void Start()
     {
         Debug.Log("started");
@@ -29,12 +32,12 @@ public class TestScript : MonoBehaviour {
         while (true)
         {
             //IPEndPoint remoteEP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1000);
-            
+
             byte[] data = udp.Receive(ref remoteEP);
             //Debug.Log("test");
             char[] charData = new char[data.Length];
-            
-            for (int i = 0;i < data.Length; i++)
+
+            for (int i = 0; i < data.Length; i++)
             {
                 if (data[i] == 0)
                     data[i] = (byte)'.';
@@ -43,23 +46,22 @@ public class TestScript : MonoBehaviour {
                 //Debug.Log("b " + data[i] + "s " + (char)data[i]);
             }
             string text = new string(charData);
-            
+
             char[] chars = new char[data.Length / sizeof(char)];
             System.Buffer.BlockCopy(data, 0, chars, 0, data.Length);
             string str = new string(chars);
- 
+
             string finding = "System.Drawing.Bitmap..........";
             int target = text.IndexOf(finding);
 
-            string result = "";
+            result = "";
             int start = target + finding.Length;
             while (!text[start].Equals('.'))
             {
                 result += text[start];
                 start++;
             }
-            
-            Debug.Log(result);
+
         }
     }
 
@@ -70,6 +72,5 @@ public class TestScript : MonoBehaviour {
         thread.Abort();
     }
 
-
-
+ 
 }
