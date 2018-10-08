@@ -25,14 +25,22 @@ public class CharacterController : MonoBehaviour
     public float checkRadius;
     public LayerMask whatIsGround;
 
+    public GameObject respownPoint;
+    Renderer playerRenderer;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerRenderer = GetComponent<Renderer>();
 
     }
 
     void Update()
     {
+        if (!playerRenderer.isVisible)
+        {
+            Respown();
+        }
 
         if (isOnTheGround)
         {
@@ -52,6 +60,7 @@ public class CharacterController : MonoBehaviour
         }
 
     }
+
     void FixedUpdate()
     {
 
@@ -80,5 +89,10 @@ public class CharacterController : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+    }
+
+    void Respown()
+    {
+        transform.position = respownPoint.transform.position; 
     }
 }

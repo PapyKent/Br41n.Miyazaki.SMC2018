@@ -26,7 +26,7 @@ public class GoalScript : MonoBehaviour {
         {
             Debug.Log("Enter");
             Textgo.SetActive(true);
-            goalText.text = "WIN!!";
+            //goalText.text = "WIN!!";
             ImageGo.SetActive(true);
         }
         
